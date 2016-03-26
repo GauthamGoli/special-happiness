@@ -27,8 +27,10 @@ while True:
     print 'Finding entropy across %s packets ..' %(len(messages_filtered_by_length))
 
     messages_raw = [RawMessage(binascii.unhexlify(val)) for val in messages_filtered_by_length]
-
-    entropy_list = [byte_entropy for byte_entropy in EntropyMeasurement.measure_entropy(messages_raw)]
-
+    try:
+        entropy_list = [byte_entropy for byte_entropy in EntropyMeasurement.measure_entropy(messages_raw)]
+    except:
+        print 'Not many packets found.'
+        continue
     print entropy_list
 
